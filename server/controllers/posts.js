@@ -10,14 +10,29 @@ export const getPosts = async (req, res) => {
     }
 }
 
-export const createPost = async (req, res) => {
-    const post = req.body;
+// export const createPost = async (req, res) => {
+//     const post = req.body;
+//     console.log(post);
+//     const newPost = new PostMessage(post)
+//     try {
+//         await newPost.save();
+//         res.status(201).json(newPost);
+//     } catch (error) {
+//         res.status(409).json({ message: error.message })
+//     }
+// }
 
-    const newPost = new PostMessage(post)
+export const createPost = async (req, res) => {
+    // console.log(req.body);
+    const { title, message, selectedFile, creator, tags } = req.body;
+    
+    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
+
     try {
-        await newPost.save();
-        res.status(201).json(newPost);
+        await newPostMessage.save();
+
+        res.status(201).json(newPostMessage );
     } catch (error) {
-        res.status(409).json({ message: error.message })
+        res.status(409).json({ message: error.message });
     }
 }

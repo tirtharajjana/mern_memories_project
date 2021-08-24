@@ -1,13 +1,49 @@
-import * as api from '../api';
+// import * as api from '../api';
 
-//Action creators
+// //Action creators
+// export const getPosts = () => async (dispatch) => {
+//     try {
+//         const { data } = await api.fetchPosts();
+
+//         dispatch({ type: 'FETCH_ALL', payload: data });
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+
+// }
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+
+import * as api from '../api/index.js';
+
 export const getPosts = () => async (dispatch) => {
-    try {
-        const { data } = await api.fetchPosts();
+  try {
+    const { data } = await api.fetchPosts();
 
-        dispatch({ type: 'FETCH_ALL', payload: data });
-    } catch (error) {
-        console.log(error.message);
-    }
+    dispatch({ type: FETCH_ALL, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
-}
+
+// export const createPost = (post) => async (dispatch) => {
+//     try {
+//         const { data } = await api.createPost(post);
+
+//         dispatch({ type: 'CREATE', payload: data })
+//     } catch (error) {
+//         console.log(error.message);
+
+//     }
+// }
+
+
+export const createPost = (post) => async (dispatch) => {
+  try {
+    const { data } = await api.createPost(post);
+    console.log(data);
+    dispatch({ type: CREATE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
