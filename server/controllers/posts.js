@@ -15,6 +15,20 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPostsBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+    try {
+        const title = new RegExp(searchQuery, 'i');
+
+        const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] })
+
+        res.json({ data: posts });
+
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
 export const getPost = async (req, res) => {
     const { id } = req.params;
 
@@ -73,7 +87,7 @@ export const likePost = async (req, res) => {
 
     const post = await PostMessage.findById(id);
 
-    const index = post.likes.findIndex((id) => id ===String(req.userId));
+    const index = post.likes.findIndex((id) => id === String(req.userId));
 
     if (index === -1) {
         //like post
