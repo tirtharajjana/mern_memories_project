@@ -18,7 +18,7 @@
 //   try {
 //     dispatch({ type: START_LOADING });
 //     const { data } = await api.fetchPost(id);
-  
+
 //     dispatch({ type: FETCH_POST, payload: data });
 //     dispatch({ type: END_LOADING })
 //   } catch (error) {
@@ -44,7 +44,7 @@
 //     const { data } = await api.createPost(post);
 //     history.push(`/posts/${data._id}`)
 //     dispatch({ type: CREATE, payload: data });
-  
+
 
 //   } catch (error) {
 //     console.log(error.message);
@@ -153,6 +153,15 @@ export const likePost = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    await api.comment(value,id)
+  } catch (error) {
+    console.log(error);
+
+  }
+}
 
 export const deletePost = (id) => async (dispatch) => {
   try {
