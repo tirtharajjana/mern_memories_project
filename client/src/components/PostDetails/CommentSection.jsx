@@ -8,6 +8,7 @@ const CommentSection = ({ post }) => {
     const classes = useStyles();
     // console.log(post);
     const dispatch = useDispatch();
+    const commentsRef = useRef();
 
     const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -20,6 +21,7 @@ const CommentSection = ({ post }) => {
         // console.log(newComments);
         setComments(newComments);
         setComment('');
+        commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
 
     return (
@@ -29,9 +31,10 @@ const CommentSection = ({ post }) => {
                     <Typography gutterBottom varient="h6" >Comments</Typography>
                     {comments.map((c, i) => (
                         <Typography key={i} gutterBottom variant="subtitle1" >
-                            {c}
+                            <strong>{c.split(':')[0]}</strong>: {c.split(':')[1]}
                         </Typography>
                     ))}
+                    <div ref={commentsRef} />
                 </div>
 
                 {user?.result?.name && (
