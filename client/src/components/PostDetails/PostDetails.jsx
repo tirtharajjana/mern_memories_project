@@ -49,8 +49,8 @@ const PostDetails = () => {
                     <Typography variant="h6">Created by: {post.name}</Typography>
                     <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
                     <Divider style={{ margin: '20px 0' }} />
-                    <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
-                    <Divider style={{ margin: '20px 0' }} />
+                    {/* <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography> */}
+                    {/* <Divider style={{ margin: '20px 0' }} /> */}
                     <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />
                 </div>
@@ -70,7 +70,9 @@ const PostDetails = () => {
                                 <Typography gutterBottom variant="subtitle2">{message}</Typography>
                                 <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
                                 <img src={selectedFile} alt={name} width="200px" />
+                                <Divider style={{ margin: '1px 0' }} />
                             </div>
+
                         ))}
                     </div>
                 </div>

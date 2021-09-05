@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Typography, TextField, Button } from '@material-ui/core';
+import { Typography, TextField, Button, Divider } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 import { commentPost } from '../../actions/posts'
@@ -16,11 +16,12 @@ const CommentSection = ({ post }) => {
     const [comment, setComment] = useState('');
 
     const handleClick = async () => {
+        setComment('');
         const finalComment = `${user.result.name}: ${comment}`
         const newComments = await dispatch(commentPost(finalComment, post._id));
         // console.log(newComments);
         setComments(newComments);
-        setComment('');
+
         commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -32,6 +33,7 @@ const CommentSection = ({ post }) => {
                     {comments.map((c, i) => (
                         <Typography key={i} gutterBottom variant="subtitle1" >
                             <strong>{c.split(':')[0]}</strong>: {c.split(':')[1]}
+                            <Divider style={{ margin: '5px 0' }} />
                         </Typography>
                     ))}
                     <div ref={commentsRef} />
